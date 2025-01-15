@@ -1,0 +1,21 @@
+{
+    "model_overview": {
+        "model_description": "Feature Engineering Model",
+        "model_owner": "AWS",
+        "model_creator": "AWS",
+        "model_id": "feature-engineering",
+        "model_name": "feature-engineering",
+        "model_version": 1,
+        "inference_environment": {
+            "container_image": [
+                "111111111111.dkr.ecr.us-east-1.amazonaws.com/feature_engineering:model_v1.0.0"
+            ]
+        }
+    },
+    "intended_uses": {
+        "purpose_of_model": "This Model is for Feature Engineering",
+        "intended_uses": "Feature Engineering",
+        "risk_rating": "Unknown",
+        "explanations_for_risk_rating": "Unknown"
+    }
+}

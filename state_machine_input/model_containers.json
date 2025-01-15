@@ -1,0 +1,140 @@
+{
+    "models": [
+        {
+            "model_name": "data-preprocessing",
+            "model_card_json_s3_object_key": "model_card_json/data_preprocessing.json",
+            "endpoint_name": "data-preprocessing",
+            "endpoint_type": "real-time",
+            "container_list": [
+                {
+                    "container_name": "data-preprocessing",
+                    "container_image_url": "111111111111.dkr.ecr.us-east-1.amazonaws.com/data_preprocessing:model_v1.0.0",
+                    "dependency": "raw-data-dependent"
+                }
+            ],
+            "variant_list": [
+                {
+                    "variant_name": "data-preprocessing-1",
+                    "variant_model_name": "data-preprocessing",
+                    "variant_instance_count": 1,
+                    "variant_instance_weight": 1,
+                    "variant_instance_type": "ml.m5.large",
+                    "max_concurrent_invocations_per_instance": 4
+                }
+            ],
+            "min_capacity": 1,
+            "max_capacity": 5
+        },
+        {
+            "model_name": "feature-engineering",
+            "model_card_json_s3_object_key": "model_card_json/feature_engineering.json",
+            "endpoint_name": "feature-engineering",
+            "endpoint_type": "async",
+            "container_list": [
+                {
+                    "container_name": "feature-engineering",
+                    "container_image_url": "111111111111.dkr.ecr.us-east-1.amazonaws.com/feature_engineering:model_v1.0.0",
+                    "dependency": "data-preprocessing-dependent"
+                }
+            ],
+            "variant_list": [
+                {
+                    "variant_name": "feature-engineering-latest",
+                    "variant_model_name": "feature-engineering",
+                    "variant_instance_count": 1,
+                    "variant_instance_weight": 1,
+                    "variant_instance_type": "ml.m5.2xlarge",
+                    "max_concurrent_invocations_per_instance": 4
+                }
+            ],
+            "min_capacity": 0,
+            "max_capacity": 5
+        },
+        {
+            "model_name": "inference-1",
+            "model_card_json_s3_object_key": "model_card_json/inference_1.json",
+            "endpoint_name": "inference-1",
+            "endpoint_type": "real-time",
+            "container_list": [
+                {
+                    "container_name": "inference-1",
+                    "container_image_url": "111111111111.dkr.ecr.us-east-1.amazonaws.com/inference:model_1_v1.0.0",
+                    "dependency": "feature-engineering-dependent"
+                }
+            ],
+            "variant_list": [
+                {
+                    "variant_name": "inference-1-latest",
+                    "variant_model_name": "inference-1",
+                    "variant_instance_count": 1,
+                    "variant_instance_weight": 1,
+                    "variant_instance_type": "ml.m5.2xlarge",
+                    "max_concurrent_invocations_per_instance": 4
+                }
+            ],
+            "min_capacity": 1,
+            "max_capacity": 5
+        },
+        {
+            "model_name": "inference-2",
+            "model_card_json_s3_object_key": "model_card_json/inference_2.json",
+            "endpoint_name": "inference-2",
+            "endpoint_type": "real-time",
+            "container_list": [
+                {
+                    "container_name": "inference-2",
+                    "container_image_url": "111111111111.dkr.ecr.us-east-1.amazonaws.com/inference:model_2_v1.0.1",
+                    "dependency": "feature-engineering-dependent"
+                }
+            ],
+            "variant_list": [
+                {
+                    "variant_name": "inference-2-latest",
+                    "variant_model_name": "inference-2",
+                    "variant_instance_count": 1,
+                    "variant_instance_weight": 1,
+                    "variant_instance_type": "ml.m5.2xlarge",
+                    "max_concurrent_invocations_per_instance": 4
+                }
+            ],
+            "min_capacity": 1,
+            "max_capacity": 5
+        }
+    ],
+    "execution_graphs": [
+        {
+            "execution_graph": {
+                "raw-data-dependent": [
+                    {
+                        "endpoint_name": "data-preprocessing",
+                        "endpoint_type": "real-time",
+                        "multi_container_endpoint": false,
+                        "container_name": "data-preprocessing"
+                    }
+                ],
+                "data-preprocessing-dependent": [
+                    {
+                        "endpoint_name": "feature-engineering",
+                        "endpoint_type": "async",
+                        "multi_container_endpoint": false,
+                        "container_name": "feature-engineering"
+                    }
+                ],
+                "feature-engineering-dependent": [
+                    {
+                        "endpoint_name": "inference-1",
+                        "endpoint_type": "real-time",
+                        "multi_container_endpoint": false,
+                        "container_name": "inference-1"
+                    },
+                    {
+                        "endpoint_name": "inference-2",
+                        "endpoint_type": "real-time",
+                        "multi_container_endpoint": false,
+                        "container_name": "inference-2"
+                    }
+                ]
+            }
+        }
+    ]
+}

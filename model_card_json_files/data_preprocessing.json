@@ -1,0 +1,21 @@
+{
+    "model_overview": {
+        "model_description": "Data Preprocessing Model",
+        "model_owner": "AWS",
+        "model_creator": "AWS",
+        "model_id": "data-preprocessing",
+        "model_name": "data-preprocessing",
+        "model_version": 1,
+        "inference_environment": {
+            "container_image": [
+                "111111111111.dkr.ecr.us-east-1.amazonaws.com/data_preprocessing:model_v1.0.0"
+            ]
+        }
+    },
+    "intended_uses": {
+        "purpose_of_model": "This Model is for Data Preprocessing",
+        "intended_uses": "Data Preprocessing",
+        "risk_rating": "Unknown",
+        "explanations_for_risk_rating": "Unknown"
+    }
+}
