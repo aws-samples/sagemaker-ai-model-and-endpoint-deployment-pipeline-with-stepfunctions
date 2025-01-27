@@ -41,8 +41,8 @@ For help, reference this [APG](https://apg-library.amazonaws.com/content-viewer/
 
 
 ## Authors and acknowledgment
-Anna Heltz, heltzan@amazon.com
-Jack Tanny, johtanny@amazon.com
+- Anna Heltz, heltzan@amazon.com
+- Jack Tanny, johtanny@amazon.com
 
 ## Security
 
